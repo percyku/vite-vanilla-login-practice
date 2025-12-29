@@ -1,0 +1,47 @@
+/* Base Styles & Typography */
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #2c3e50;
+}
+
+/* Common Animations */
+.fade-in {
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Utility / Overrides */
+.text-primary-custom {
+    color: #764ba2 !important;
+}
+
+.btn-primary {
+    background-color: #764ba2;
+    border-color: #764ba2;
+}
+
+.btn-primary:hover {
+    background-color: #667eea;
+    border-color: #667eea;
+}
+
+a {
+    color: #764ba2;
+}
+
+a:hover {
+    color: #667eea;
+}

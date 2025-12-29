@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+  </head>
+
+  <body>
+    <div class="dashboard-container">
+      <!-- Sidebar -->
+      <aside class="sidebar fade-in">
+        <div class="brand"><i class="bi bi-grid-1x2-fill"></i> MyApp</div>
+
+        <nav class="nav-links">
+          <a href="#" class="nav-link active">
+            <i class="bi bi-speedometer2"></i> Dashboard
+          </a>
+          <a href="#" class="nav-link">
+            <i class="bi bi-person"></i> Profile
+          </a>
+          <a href="#" class="nav-link"> <i class="bi bi-gear"></i> Settings </a>
+        </nav>
+
+        <div class="user-profile">
+          <div class="user-avatar" id="user-avatar-initials">U</div>
+          <div class="user-info">
+            <div
+              class="fw-bold"
+              style="font-size: 0.9rem"
+              id="sidebar-user-name"
+            >
+              User
+            </div>
+            <div class="text-white-50" style="font-size: 0.75rem">
+              Premium Member
+            </div>
+          </div>
+          <button
+            id="logout-btn"
+            class="btn btn-sm btn-outline-light ms-auto"
+            title="Sign Out"
+          >
+            <i class="bi bi-box-arrow-right"></i>
+          </button>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- Navbar -->
+        <header class="glass-navbar fade-in">
+          <h4 class="m-0 fw-bold">Overview</h4>
+          <div class="d-flex align-items-center gap-3">
+            <button
+              class="btn btn-light rounded-circle shadow-sm"
+              style="width: 40px; height: 40px"
+            >
+              <i class="bi bi-bell"></i>
+            </button>
+          </div>
+        </header>
+
+        <!-- Welcome Section -->
+        <div class="mb-4 fade-in">
+          <h1 class="fw-bold" id="welcome-msg">Welcome back!</h1>
+          <p class="text-muted">Here's what's happening today.</p>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid fade-in">
+          <div class="glass-card">
+            <div class="card-icon bg-icon-primary">
+              <i class="bi bi-people"></i>
+            </div>
+            <h5 class="text-muted mb-1">Total Users</h5>
+            <h2 class="fw-bold">1,234</h2>
+            <small class="text-success"
+              ><i class="bi bi-arrow-up"></i> 12% from last week</small
+            >
+          </div>
+
+          <div class="glass-card">
+            <div class="card-icon bg-icon-success">
+              <i class="bi bi-wallet2"></i>
+            </div>
+            <h5 class="text-muted mb-1">Revenue</h5>
+            <h2 class="fw-bold">$45,678</h2>
+            <small class="text-success"
+              ><i class="bi bi-arrow-up"></i> 5% from last month</small
+            >
+          </div>
+
+          <div class="glass-card">
+            <div class="card-icon bg-icon-warning">
+              <i class="bi bi-activity"></i>
+            </div>
+            <h5 class="text-muted mb-1">Active Sessions</h5>
+            <h2 class="fw-bold">892</h2>
+            <small class="text-danger"
+              ><i class="bi bi-arrow-down"></i> 1% from yesterday</small
+            >
+          </div>
+        </div>
+
+        <!-- Recent Activity (Placeholder) -->
+        <div class="glass-card fade-in">
+          <h5 class="fw-bold mb-3">Recent Activity</h5>
+          <div class="list-group list-group-flush bg-transparent">
+            <div
+              class="list-group-item bg-transparent d-flex align-items-center border-bottom"
+            >
+              <i class="bi bi-check-circle-fill text-success me-3"></i>
+              <div>
+                <div class="fw-bold">System Update</div>
+                <small class="text-muted"
+                  >System successfully updated to v2.0</small
+                >
+              </div>
+              <small class="text-muted ms-auto">2h ago</small>
+            </div>
+            <div
+              class="list-group-item bg-transparent d-flex align-items-center border-bottom"
+            >
+              <i class="bi bi-person-plus-fill text-primary me-3"></i>
+              <div>
+                <div class="fw-bold">New User Registration</div>
+                <small class="text-muted">John Doe joined the platform</small>
+              </div>
+              <small class="text-muted ms-auto">5h ago</small>
+            </div>
+            <div
+              class="list-group-item bg-transparent d-flex align-items-center"
+            >
+              <i class="bi bi-file-earmark-text-fill text-secondary me-3"></i>
+              <div>
+                <div class="fw-bold">Report Generated</div>
+                <small class="text-muted"
+                  >Monthly financial report is ready</small
+                >
+              </div>
+              <small class="text-muted ms-auto">1d ago</small>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script type="module" src="../dashboard.js"></script>
+  </body>
+</html>
