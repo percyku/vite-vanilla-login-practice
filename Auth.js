@@ -4,8 +4,7 @@ axios.defaults.xsrfHeaderName = "X-XSRF-TOKEN";
 axios.defaults.xsrfCookieName = "XSRF-TOKEN";
 axios.defaults.withCredentials = true;
 
-// const API_URL = "http://localhost:8080/";
-const API_URL = "http://percyku1919.tplinkdns.com:9098/";
+const API_URL = "http://localhost:8080/";
 
 class Auth {
   checkUserLoginOrNot() {
