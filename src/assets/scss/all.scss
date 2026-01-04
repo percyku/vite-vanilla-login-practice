@@ -2,9 +2,9 @@
 
 @import "bootstrap/scss/bootstrap";
 
-@import "../scss/pages/base";
-@import "../scss/pages/login";
+@import "../scss/layout/base";
+
+@import "../scss/pages/index";
 @import "../scss/pages/dashboard";
 
-@import "../scss/layout/style";
-@import "../scss/layout/untilities";
+@import "../scss/utilities/loading";

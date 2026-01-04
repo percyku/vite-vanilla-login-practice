@@ -8,7 +8,7 @@ const API_URL = "http://localhost:8080/";
 // const API_URL = "http://192.168.0.176:8080/";
 class Auth {
   checkUserLoginOrNot() {
-    return axios.get(`${API_URL}welcome`);
+    return axios.get(`${API_URL}checkUserStatus`);
   }
 
   login(email, password) {
@@ -69,7 +69,6 @@ class Auth {
       last_name: lastName,
       username: usernName,
     };
-    console.log(userData);
     return axios.post(`${API_URL}updateUser`, userData, {
       headers: {
         //   Authorization: baToken,

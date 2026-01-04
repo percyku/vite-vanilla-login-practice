@@ -8,35 +8,44 @@ console.log("Dashboard Initialized");
 
 const API_URL = "http://localhost:8080/";
 // const API_URL = "http://percyku1919.tplinkdns.com:9098/";
+const loading = document.querySelector(".loading");
+
 // --- Auth Check ---
-const userStr = localStorage.getItem("user");
+// const userStr = localStorage.getItem("user");
+// if (userStr) {
+//   const user = JSON.parse(userStr);
+//   // Update welcome message
+//   const welcomeMsg = document.querySelector("#welcome-msg");
+//   if (welcomeMsg) {
+//     welcomeMsg.textContent = `Welcome back, ${user.name || "User"}!`;
+//   }
+//   // Update sidebar info
+//   const sidebarName = document.querySelector("#sidebar-user-name");
+//   const sidebarAvatar = document.querySelector("#user-avatar-initials");
 
-// if (!userStr) {
-//     alert('You must be logged in to view this page!')
-//     window.location.href = '/'
-// } else {
-//     const user = JSON.parse(userStr)
-//     // Update welcome message
-//     const welcomeMsg = document.querySelector('#welcome-msg')
-//     if (welcomeMsg) {
-//         welcomeMsg.textContent = `Welcome back, ${user.name || 'User'}!`
-//     }
-//     // Update sidebar info
-//     const sidebarName = document.querySelector('#sidebar-user-name')
-//     const sidebarAvatar = document.querySelector('#user-avatar-initials')
-
-//     if (sidebarName) sidebarName.textContent = user.name || user.email.split('@')[0]
-//     if (sidebarAvatar) sidebarAvatar.textContent = (user.name || user.email).charAt(0).toUpperCase()
+//   if (sidebarName)
+//     sidebarName.textContent = user.name || user.email.split("@")[0];
+//   if (sidebarAvatar)
+//     sidebarAvatar.textContent = (user.name || user.email)
+//       .charAt(0)
+//       .toUpperCase();
 // }
 
-const user = userStr
-  ? JSON.parse(userStr)
-  : {
-      userName: "User",
-      email: "user@example.com",
-      lastNmae: "",
-      firstName: "",
-    };
+// const user = userStr
+//   ? JSON.parse(userStr)
+//   : {
+//       userName: "User",
+//       email: "user@example.com",
+//       lastNmae: "",
+//       firstName: "",
+//     };
+
+const user = {
+  userName: "User",
+  email: "user@example.com",
+  lastName: "",
+  firstName: "",
+};
 
 const sidebarName = document.querySelector("#sidebar-user-name");
 const sidebarAvatar = document.querySelector("#user-avatar-initials");
@@ -89,7 +98,7 @@ if (navProfile) {
 // 3. Profile Form Logic
 const profileEmail = document.getElementById("profile-email");
 const profileLastName = document.getElementById("profile-lastname");
-const profilefirstName = document.getElementById("profile-firstname");
+const profileFirstName = document.getElementById("profile-firstname");
 const profileNickName = document.getElementById("profile-nickname");
 const profilePassword = document.getElementById("profile-password");
 const profilePonfirmPassword = document.getElementById(
@@ -103,8 +112,8 @@ function populateProfileForm() {
   if (profileNickName) {
     profileNickName.value = user.userName || "";
   }
-  if (profilefirstName) {
-    profilefirstName.value = user.firstName || "";
+  if (profileFirstName) {
+    profileFirstName.value = user.firstName || "";
   }
   if (profileLastName) {
     profileLastName.value = user.lastName || "";
@@ -119,6 +128,19 @@ if (profileForm) {
 
     let password = profilePassword.value;
     let confirmPassword = profilePonfirmPassword.value;
+
+    if (profileNickName.value === "") {
+      alert("Nick Name is not emtpy");
+      return;
+    }
+    if (profileFirstName.value === "") {
+      alert("Fitst Name is not emtpy");
+      return;
+    }
+    if (profileLastName.value === "") {
+      alert("Last Name is not emtpy");
+      return;
+    }
 
     let logoutFlag = false;
     if (password || confirmPassword) {
@@ -135,40 +157,42 @@ if (profileForm) {
     }
 
     try {
+      loading.style.display = "flex";
       let res = await Auth.updateUser(
         profileEmail.value,
         password,
         profileNickName.value,
-        profilefirstName.value,
+        profileFirstName.value,
         profileLastName.value
       );
 
       if (res.status === 200) {
-        user.email = res.data.email;
-        user.userName = res.data.userName;
-        user.lastName = res.data.lastName;
-        user.firstName = res.data.firstName;
-
         if (logoutFlag) {
-          alert("Because you have been updated password.so please login again");
           try {
             let res = await Auth.logout();
-            console.log(res.data);
-            window.location.href = "index.html";
+            alert(
+              "Update User Info Successful! but you need to login again because of changing your password"
+            );
           } catch (error) {
             console.log(error.response.data);
-            axios.defaults.withCredentials = false;
             alert("Gettign some problem,please reload");
           } finally {
+            loading.style.display = "none";
             window.location.href = "index.html";
           }
+        } else {
+          alert("Update User Info Successful!");
+          user.email = res.data.email;
+          user.userName = res.data.userName;
+          user.lastName = res.data.lastName;
+          user.firstName = res.data.firstName;
         }
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      loading.style.display = "none";
     }
-
-    // alert("Profile saved! (This is a demo, no data is persisted to backend)");
   });
 }
 
@@ -196,8 +220,6 @@ async function init() {
   try {
     const res = await Auth.checkUserLoginOrNot();
 
-    console.log(res);
-
     if (res.status === 200) {
       document.querySelector(
         "#welcome-msg"
@@ -206,8 +228,6 @@ async function init() {
       user.userName = res.data.userName;
       user.lastName = res.data.lastName;
       user.firstName = res.data.firstName;
-
-      console.log(user);
     } else {
       window.location.href = "index.html";
     }

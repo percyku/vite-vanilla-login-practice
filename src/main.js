@@ -54,7 +54,6 @@ document.querySelector("#login-form").addEventListener("submit", async (e) => {
     try {
       loading.style.display = "flex";
       let res = await Auth.login(email, password);
-      console.log(res);
       if (res.status === 200) {
         alert(`Login successful for ${email}!\n(Backend integration pending)`);
         window.location.href = "dashboard.html";
@@ -85,7 +84,6 @@ document
     const submitBtn = document.querySelector(
       '#register-form button[type="submit"]'
     );
-    const originalBtnText = submitBtn.innerHTML;
 
     if (password !== confirmPassword) {
       alert("Passwords do not match!");
@@ -106,7 +104,6 @@ document
 
       try {
         let res = await Auth.register(email, password);
-        console.log(res);
         if (res.status === 200 && res.data === "register ok") {
           alert(
             `Account created successfully for ${email}!\nLogging you in...`
