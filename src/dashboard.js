@@ -6,40 +6,6 @@ import Auth from "../Auth";
 
 console.log("Dashboard Initialized");
 
-const API_URL = "http://localhost:8080/";
-// const API_URL = "http://percyku1919.tplinkdns.com:9098/";
-const loading = document.querySelector(".loading");
-
-// --- Auth Check ---
-// const userStr = localStorage.getItem("user");
-// if (userStr) {
-//   const user = JSON.parse(userStr);
-//   // Update welcome message
-//   const welcomeMsg = document.querySelector("#welcome-msg");
-//   if (welcomeMsg) {
-//     welcomeMsg.textContent = `Welcome back, ${user.name || "User"}!`;
-//   }
-//   // Update sidebar info
-//   const sidebarName = document.querySelector("#sidebar-user-name");
-//   const sidebarAvatar = document.querySelector("#user-avatar-initials");
-
-//   if (sidebarName)
-//     sidebarName.textContent = user.name || user.email.split("@")[0];
-//   if (sidebarAvatar)
-//     sidebarAvatar.textContent = (user.name || user.email)
-//       .charAt(0)
-//       .toUpperCase();
-// }
-
-// const user = userStr
-//   ? JSON.parse(userStr)
-//   : {
-//       userName: "User",
-//       email: "user@example.com",
-//       lastNmae: "",
-//       firstName: "",
-//     };
-
 const user = {
   userName: "User",
   email: "user@example.com",
@@ -47,23 +13,15 @@ const user = {
   firstName: "",
 };
 
-const sidebarName = document.querySelector("#sidebar-user-name");
-const sidebarAvatar = document.querySelector("#user-avatar-initials");
-
-if (sidebarName)
-  sidebarName.textContent = user.name || user.email.split("@")[0];
-if (sidebarAvatar)
-  sidebarAvatar.textContent = (user.name || user.email || "U")
-    .charAt(0)
-    .toUpperCase();
-
-// 2. Navigation Logic
+// --- Untitlies DOM Elements ---
+const loading = document.querySelector(".loading");
 const navDashboard = document.getElementById("nav-dashboard");
 const navProfile = document.getElementById("nav-profile");
 const sectionDashboard = document.getElementById("section-dashboard");
 const sectionProfile = document.getElementById("section-profile");
 const pageTitle = document.getElementById("page-title");
 
+// --- Switch section logic ---
 function showSection(sectionId) {
   if (sectionId === "dashboard") {
     sectionDashboard.classList.remove("d-none");
@@ -81,6 +39,7 @@ function showSection(sectionId) {
   }
 }
 
+// --- switch Section btn ---
 if (navDashboard) {
   navDashboard.addEventListener("click", (e) => {
     e.preventDefault();
@@ -95,7 +54,8 @@ if (navProfile) {
   });
 }
 
-// 3. Profile Form Logic
+// --- Profile Form Logic ---
+// --- profile DOM Elements ---
 const profileEmail = document.getElementById("profile-email");
 const profileLastName = document.getElementById("profile-lastname");
 const profileFirstName = document.getElementById("profile-firstname");

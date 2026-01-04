@@ -5,7 +5,7 @@ axios.defaults.xsrfCookieName = "XSRF-TOKEN";
 axios.defaults.withCredentials = true;
 
 const API_URL = "http://localhost:8080/";
-// const API_URL = "http://192.168.0.176:8080/";
+
 class Auth {
   checkUserLoginOrNot() {
     return axios.get(`${API_URL}checkUserStatus`);
