@@ -91,6 +91,10 @@ const profileEmail = document.getElementById("profile-email");
 const profileLastName = document.getElementById("profile-lastname");
 const profilefirstName = document.getElementById("profile-firstname");
 const profileNickName = document.getElementById("profile-nickname");
+const profilePassword = document.getElementById("profile-password");
+const profilePonfirmPassword = document.getElementById(
+  "profile-confirm-password"
+);
 
 function populateProfileForm() {
   if (profileEmail) {
@@ -99,25 +103,24 @@ function populateProfileForm() {
   if (profileNickName) {
     profileNickName.value = user.userName || "";
   }
-  if (profileLastName) {
-    profileLastName.value = user.lastName || "";
-  }
   if (profilefirstName) {
     profilefirstName.value = user.firstName || "";
+  }
+  if (profileLastName) {
+    profileLastName.value = user.lastName || "";
   }
 }
 
 // Handle Form Submit (Mock)
 const profileForm = document.getElementById("profile-form");
 if (profileForm) {
-  profileForm.addEventListener("submit", (e) => {
+  profileForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const password = document.getElementById("profile-password").value;
-    const confirmPassword = document.getElementById(
-      "profile-confirm-password"
-    ).value;
+    let password = profilePassword.value;
+    let confirmPassword = profilePonfirmPassword.value;
 
+    let logoutFlag = false;
     if (password || confirmPassword) {
       if (password !== confirmPassword) {
         alert("Passwords do not match!");
@@ -127,9 +130,45 @@ if (profileForm) {
         alert("Password must be at least 6 characters long.");
         return;
       }
+
+      logoutFlag = true;
     }
 
-    alert("Profile saved! (This is a demo, no data is persisted to backend)");
+    try {
+      let res = await Auth.updateUser(
+        profileEmail.value,
+        password,
+        profileNickName.value,
+        profilefirstName.value,
+        profileLastName.value
+      );
+
+      if (res.status === 200) {
+        user.email = res.data.email;
+        user.userName = res.data.userName;
+        user.lastName = res.data.lastName;
+        user.firstName = res.data.firstName;
+
+        if (logoutFlag) {
+          alert("Because you have been updated password.so please login again");
+          try {
+            let res = await Auth.logout();
+            console.log(res.data);
+            window.location.href = "index.html";
+          } catch (error) {
+            console.log(error.response.data);
+            axios.defaults.withCredentials = false;
+            alert("Gettign some problem,please reload");
+          } finally {
+            window.location.href = "index.html";
+          }
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
+    // alert("Profile saved! (This is a demo, no data is persisted to backend)");
   });
 }
 
@@ -138,9 +177,6 @@ const logoutBtn = document.querySelector("#logout-btn");
 if (logoutBtn) {
   logoutBtn.addEventListener("click", async () => {
     if (confirm("Are you sure you want to sign out?")) {
-      // localStorage.removeItem("user");
-      // window.location.href = "index.html";
-
       try {
         let res = await Auth.logout();
         console.log(res.data);
@@ -166,7 +202,6 @@ async function init() {
       document.querySelector(
         "#welcome-msg"
       ).innerHTML = `${res.data.userName} welcome`;
-      console.log(user);
       user.email = res.data.email;
       user.userName = res.data.userName;
       user.lastName = res.data.lastName;
@@ -178,8 +213,8 @@ async function init() {
     }
   } catch (error) {
     console.log(error);
-    // confirm("Please login!");
-    // window.location.href = "index.html";
+    confirm("Please login!");
+    window.location.href = "index.html";
   }
 }
 init();

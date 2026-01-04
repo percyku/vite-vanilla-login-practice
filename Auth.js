@@ -55,6 +55,28 @@ class Auth {
       password: password,
     });
   }
+
+  updateUser(email, password, usernName, firstName, lastName) {
+    let token = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("XSRF-TOKEN="))
+      ?.split("=")[1];
+
+    let userData = {
+      email: email,
+      password: password,
+      first_name: firstName,
+      last_name: lastName,
+      username: usernName,
+    };
+    console.log(userData);
+    return axios.post(`${API_URL}updateUser`, userData, {
+      headers: {
+        //   Authorization: baToken,
+        "X-XSRF-TOKEN": token,
+      },
+    });
+  }
 }
 
 export default new Auth();
