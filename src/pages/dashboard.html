@@ -14,10 +14,10 @@
         <div class="brand"><i class="bi bi-grid-1x2-fill"></i> MyApp</div>
 
         <nav class="nav-links">
-          <a href="#" class="nav-link active">
+          <a href="#" id="nav-dashboard" class="nav-link active">
             <i class="bi bi-speedometer2"></i> Dashboard
           </a>
-          <a href="#" class="nav-link">
+          <a href="#" id="nav-profile" class="nav-link">
             <i class="bi bi-person"></i> Profile
           </a>
           <a href="#" class="nav-link"> <i class="bi bi-gear"></i> Settings </a>
@@ -51,7 +51,7 @@
       <main class="main-content">
         <!-- Navbar -->
         <header class="glass-navbar fade-in">
-          <h4 class="m-0 fw-bold">Overview</h4>
+          <h4 class="m-0 fw-bold" id="page-title">Overview</h4>
           <div class="d-flex align-items-center gap-3">
             <button
               class="btn btn-light rounded-circle shadow-sm"
@@ -62,86 +62,193 @@
           </div>
         </header>
 
-        <!-- Welcome Section -->
-        <div class="mb-4 fade-in">
-          <h1 class="fw-bold" id="welcome-msg">Welcome back!</h1>
-          <p class="text-muted">Here's what's happening today.</p>
+        <!-- Dashboard Section -->
+        <div id="section-dashboard">
+          <!-- Welcome Section -->
+          <div class="mb-4 fade-in">
+            <h1 class="fw-bold" id="welcome-msg">Welcome back!</h1>
+            <p class="text-muted">Here's what's happening today.</p>
+          </div>
+
+          <!-- Stats Grid -->
+          <div class="stats-grid fade-in">
+            <div class="glass-card">
+              <div class="card-icon bg-icon-primary">
+                <i class="bi bi-people"></i>
+              </div>
+              <h5 class="text-muted mb-1">Total Users</h5>
+              <h2 class="fw-bold">1,234</h2>
+              <small class="text-success"
+                ><i class="bi bi-arrow-up"></i> 12% from last week</small
+              >
+            </div>
+
+            <div class="glass-card">
+              <div class="card-icon bg-icon-success">
+                <i class="bi bi-wallet2"></i>
+              </div>
+              <h5 class="text-muted mb-1">Revenue</h5>
+              <h2 class="fw-bold">$45,678</h2>
+              <small class="text-success"
+                ><i class="bi bi-arrow-up"></i> 5% from last month</small
+              >
+            </div>
+
+            <div class="glass-card">
+              <div class="card-icon bg-icon-warning">
+                <i class="bi bi-activity"></i>
+              </div>
+              <h5 class="text-muted mb-1">Active Sessions</h5>
+              <h2 class="fw-bold">892</h2>
+              <small class="text-danger"
+                ><i class="bi bi-arrow-down"></i> 1% from yesterday</small
+              >
+            </div>
+          </div>
+
+          <!-- Recent Activity (Placeholder) -->
+          <div class="glass-card fade-in">
+            <h5 class="fw-bold mb-3">Recent Activity</h5>
+            <div class="list-group list-group-flush bg-transparent">
+              <div
+                class="list-group-item bg-transparent d-flex align-items-center border-bottom"
+              >
+                <i class="bi bi-check-circle-fill text-success me-3"></i>
+                <div>
+                  <div class="fw-bold">System Update</div>
+                  <small class="text-muted"
+                    >System successfully updated to v2.0</small
+                  >
+                </div>
+                <small class="text-muted ms-auto">2h ago</small>
+              </div>
+              <div
+                class="list-group-item bg-transparent d-flex align-items-center border-bottom"
+              >
+                <i class="bi bi-person-plus-fill text-primary me-3"></i>
+                <div>
+                  <div class="fw-bold">New User Registration</div>
+                  <small class="text-muted">John Doe joined the platform</small>
+                </div>
+                <small class="text-muted ms-auto">5h ago</small>
+              </div>
+              <div
+                class="list-group-item bg-transparent d-flex align-items-center"
+              >
+                <i class="bi bi-file-earmark-text-fill text-secondary me-3"></i>
+                <div>
+                  <div class="fw-bold">Report Generated</div>
+                  <small class="text-muted"
+                    >Monthly financial report is ready</small
+                  >
+                </div>
+                <small class="text-muted ms-auto">1d ago</small>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <!-- Stats Grid -->
-        <div class="stats-grid fade-in">
-          <div class="glass-card">
-            <div class="card-icon bg-icon-primary">
-              <i class="bi bi-people"></i>
-            </div>
-            <h5 class="text-muted mb-1">Total Users</h5>
-            <h2 class="fw-bold">1,234</h2>
-            <small class="text-success"
-              ><i class="bi bi-arrow-up"></i> 12% from last week</small
-            >
-          </div>
-
-          <div class="glass-card">
-            <div class="card-icon bg-icon-success">
-              <i class="bi bi-wallet2"></i>
-            </div>
-            <h5 class="text-muted mb-1">Revenue</h5>
-            <h2 class="fw-bold">$45,678</h2>
-            <small class="text-success"
-              ><i class="bi bi-arrow-up"></i> 5% from last month</small
-            >
-          </div>
-
-          <div class="glass-card">
-            <div class="card-icon bg-icon-warning">
-              <i class="bi bi-activity"></i>
-            </div>
-            <h5 class="text-muted mb-1">Active Sessions</h5>
-            <h2 class="fw-bold">892</h2>
-            <small class="text-danger"
-              ><i class="bi bi-arrow-down"></i> 1% from yesterday</small
-            >
-          </div>
-        </div>
-
-        <!-- Recent Activity (Placeholder) -->
-        <div class="glass-card fade-in">
-          <h5 class="fw-bold mb-3">Recent Activity</h5>
-          <div class="list-group list-group-flush bg-transparent">
-            <div
-              class="list-group-item bg-transparent d-flex align-items-center border-bottom"
-            >
-              <i class="bi bi-check-circle-fill text-success me-3"></i>
-              <div>
-                <div class="fw-bold">System Update</div>
-                <small class="text-muted"
-                  >System successfully updated to v2.0</small
+        <!-- Profile Section -->
+        <div id="section-profile" class="d-none fade-in">
+          <div class="glass-card" style="max-width: 800px; margin: 0 auto">
+            <h4 class="fw-bold mb-4">Edit Profile</h4>
+            <form id="profile-form">
+              <div class="mb-3">
+                <label for="profile-email" class="form-label"
+                  >Email Address</label
                 >
+                <input
+                  type="email"
+                  class="form-control"
+                  id="profile-email"
+                  readonly
+                  disabled
+                />
+                <div class="form-text">
+                  Your email address cannot be changed.
+                </div>
               </div>
-              <small class="text-muted ms-auto">2h ago</small>
-            </div>
-            <div
-              class="list-group-item bg-transparent d-flex align-items-center border-bottom"
-            >
-              <i class="bi bi-person-plus-fill text-primary me-3"></i>
-              <div>
-                <div class="fw-bold">New User Registration</div>
-                <small class="text-muted">John Doe joined the platform</small>
+
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="profile-lastname" class="form-label"
+                    >Last Name</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="profile-lastname"
+                    placeholder="Doe"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="profile-firstname" class="form-label"
+                    >First Name</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="profile-firstname"
+                    placeholder="John"
+                  />
+                </div>
               </div>
-              <small class="text-muted ms-auto">5h ago</small>
-            </div>
-            <div
-              class="list-group-item bg-transparent d-flex align-items-center"
-            >
-              <i class="bi bi-file-earmark-text-fill text-secondary me-3"></i>
-              <div>
-                <div class="fw-bold">Report Generated</div>
-                <small class="text-muted"
-                  >Monthly financial report is ready</small
+
+              <div class="mb-3">
+                <label for="profile-nickname" class="form-label"
+                  >Nickname</label
                 >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="profile-nickname"
+                  placeholder="Johnny"
+                />
               </div>
-              <small class="text-muted ms-auto">1d ago</small>
-            </div>
+
+              <div class="mb-4">
+                <label for="profile-role" class="form-label">Role</label>
+                <select class="form-select" id="profile-role">
+                  <option value="general" selected>General</option>
+                  <option value="professional">Professional</option>
+                </select>
+              </div>
+
+              <hr class="my-4" style="border-color: rgba(255, 255, 255, 0.2)" />
+
+              <h5 class="fw-bold mb-3">Security</h5>
+              <div class="row mb-4">
+                <div class="col-md-6">
+                  <label for="profile-password" class="form-label"
+                    >New Password</label
+                  >
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="profile-password"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="profile-confirm-password" class="form-label"
+                    >Confirm Password</label
+                  >
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="profile-confirm-password"
+                  />
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-end gap-2">
+                <button type="button" class="btn btn-outline-secondary">
+                  Cancel
+                </button>
+                <button type="submit" class="btn btn-primary px-4">
+                  Save Changes
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </main>

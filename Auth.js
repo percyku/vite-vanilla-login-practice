@@ -5,7 +5,7 @@ axios.defaults.xsrfCookieName = "XSRF-TOKEN";
 axios.defaults.withCredentials = true;
 
 const API_URL = "http://localhost:8080/";
-
+// const API_URL = "http://192.168.0.176:8080/";
 class Auth {
   checkUserLoginOrNot() {
     return axios.get(`${API_URL}welcome`);
@@ -25,6 +25,9 @@ class Auth {
     );
   }
 
+  loginGoogle() {
+    return `${API_URL}oauth2/authorization/google`;
+  }
   loginGitHub() {
     return `${API_URL}oauth2/authorization/github`;
   }
@@ -44,6 +47,13 @@ class Auth {
         },
       }
     );
+  }
+
+  register(email, password) {
+    return axios.post(`${API_URL}registerUser`, {
+      email: email,
+      password: password,
+    });
   }
 }
 

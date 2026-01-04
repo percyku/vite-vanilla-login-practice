@@ -56,8 +56,6 @@ document.querySelector("#login-form").addEventListener("submit", async (e) => {
       let res = await Auth.login(email, password);
       console.log(res);
       if (res.status === 200) {
-        // Create session
-        // localStorage.setItem("user", JSON.stringify({ email: email }));
         alert(`Login successful for ${email}!\n(Backend integration pending)`);
         window.location.href = "dashboard.html";
       }
@@ -72,56 +70,67 @@ document.querySelector("#login-form").addEventListener("submit", async (e) => {
 });
 
 // --- Registration Logic ---
-document.querySelector("#register-form").addEventListener("submit", (e) => {
-  e.preventDefault();
-  const name = document.querySelector("#reg-name").value;
-  const email = document.querySelector("#reg-email").value;
-  const password = document.querySelector("#reg-password").value;
-  const confirmPassword = document.querySelector("#reg-confirm-password").value;
-  const terms = document.querySelector("#terms").checked;
+document
+  .querySelector("#register-form")
+  .addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-  const submitBtn = document.querySelector(
-    '#register-form button[type="submit"]'
-  );
-  const originalBtnText = submitBtn.innerHTML;
+    const email = document.querySelector("#reg-email").value;
+    const password = document.querySelector("#reg-password").value;
+    const confirmPassword = document.querySelector(
+      "#reg-confirm-password"
+    ).value;
+    const terms = document.querySelector("#terms").checked;
 
-  if (password !== confirmPassword) {
-    alert("Passwords do not match!");
-    return;
-  }
+    const submitBtn = document.querySelector(
+      '#register-form button[type="submit"]'
+    );
+    const originalBtnText = submitBtn.innerHTML;
 
-  if (!terms) {
-    alert("You must agree to the terms!");
-    return;
-  }
+    if (password !== confirmPassword) {
+      alert("Passwords do not match!");
+      return;
+    }
 
-  if (name && email && password) {
-    submitBtn.disabled = true;
-    submitBtn.innerHTML =
-      '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Creating Account...';
+    if (!terms) {
+      alert("You must agree to the terms!");
+      return;
+    }
 
-    console.log(`Attempting registration for: ${email}`);
+    if (email && password) {
+      submitBtn.disabled = true;
+      submitBtn.innerHTML =
+        '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Creating Account...';
 
-    setTimeout(() => {
-      // Create session
-      localStorage.setItem(
-        "user",
-        JSON.stringify({ name: name, email: email })
-      );
+      console.log(`Attempting registration for: ${email}`);
 
-      alert(`Account created successfully for ${name}!\nLogging you in...`);
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = originalBtnText;
+      try {
+        let res = await Auth.register(email, password);
+        console.log(res);
+        if (res.status === 200 && res.data === "register ok") {
+          alert(
+            `Account created successfully for ${email}!\nLogging you in...`
+          );
+          window.location.href = "index.html";
+        }
+      } catch (error) {
+        console.log(error);
 
-      // Redirect
-      window.location.href = "/dashboard.html";
-    }, 1500);
-  }
-});
+        if (error.status === 409) {
+          submitBtn.innerHTML = error.response.data;
+        } else {
+          submitBtn.innerHTML = "register fail";
+        }
+      } finally {
+        submitBtn.disabled = false;
+      }
+    }
+  });
 
 // --- Social Login ---
 document.querySelector("#google-login").addEventListener("click", () => {
-  alert("Google Login clicked (Implementation pending backend)");
+  // alert("Google Login clicked (Implementation pending backend)");
+  window.location.href = Auth.loginGoogle();
 });
 
 document.querySelector("#github-login").addEventListener("click", () => {
